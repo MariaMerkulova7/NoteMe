@@ -11,7 +11,7 @@
     <title>{{ title }}</title>
 </head>
 <body>
-<header>
+<header class="fixed-top">
 
         {% if current_user.is_authenticated %}
             <nav class="navbar navbar-light" style="background-color: #c29be0;">
@@ -32,9 +32,10 @@
             </nav>
         {% endif %}
 
-    <h4 style="margin: 20px">Распланируй свою жизнь!</h4>
+<!--    <h4 style="margin: 20px">Распланируй свою жизнь!</h4>-->
 </header>
-<main role="main" class="container">
+<main role="main" class="container" style="margin-bottom:200px; margin-top: 100px;">
+    <h4 style="margin: 20px">Распланируй свою жизнь!</h4>
     {% block content %}{% endblock %}
 </main>
 </body>
