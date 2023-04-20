@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>{{ title }}</title>
+</head>
+<body>
+<header>
+
+        {% if current_user.is_authenticated %}
+            <nav class="navbar navbar-light" style="background-color: #c29be0;">
+                    <a class="navbar-brand" style="font-size: 1.5em;" href="/main_page/">
+                    <img src="/static/img/logo_.jpg" width="50" height="50" alt="">
+                    Блокнот-планировщик</a>
+                    <a class="navbar-brand" style="color: #711fa3; font-size: 1.5em;" href="/quit/">{{ current_user.name }}</a>
+                    <a class="navbar-brand" style="font-size: 1.5em;" href="/main_page/">NoteMe</a>
+            </nav>
+        {% else %}
+            <nav class="navbar navbar-light" style="background-color: #a4caf5;">
+                <a class="navbar-brand" style="font-size: 1.5em;" href="/">
+                <img src="/static/img/logo_.jpg" width="50" height="50" alt="">
+                Блокнот-планировщик</a>
+                <a class="nav-link" style="color: #711fa3; font-size: 1.5em;" href="/registration/">Зарегистрироваться</a>
+                <a class="nav-link" style="color: #711fa3; font-size: 1.5em;" href="/entrance/">Войти</a>
+                <a class="navbar-brand" style="font-size: 1.5em;" href="/">NoteMe</a>
+            </nav>
+        {% endif %}
+
+    <h4 style="margin: 20px">Распланируй свою жизнь!</h4>
+</header>
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+<footer class="fixed-bottom">
+    <nav class="navbar navbar-light" style="background-color: #c29be0; margin-top: 20px; padding: 15px;">
+        <h6 style="margin-left: 20px">Меркулова Мария</h6>
+        <h6 style="margin-left: 20px"><a href="mailto:marym271007@yandex.ru">marym271007@yandex.ru</a></h6>
+        <h6 style="margin-left: 20px">2023 год</h6>
+    </nav>
+</footer>
+</html>

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% set NAME_OF_MONTH = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь",
+                 "Ноябрь", "Декабрь"] %}
+{% set NAME_OF_DAY = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"] %}
+
+
+<div>
+    
+    <h3>
+    <a href="/main_page/{{previous_month_before_screen}}/" class="btn btn-primary" style="background-color: #cac6f7; color: #000"><- Предыдущий месяц</a>
+    {{NAME_OF_MONTH[screen_month - 1]}}, {{screen_year}}
+    <a href="/main_page/{{next_month_after_screen}}/" class="btn btn-primary" style="background-color: #cac6f7; color: #000">Следующий месяц -></a>
+    </h3>
+</div>
+
+<br>
+<table style='background-color:#a6e1ec;' class="table table-bordered">
+    <tr>
+        {% for item in NAME_OF_DAY %}
+            <th style="text-align: center;">{{item}}</th>
+        {% endfor %}
+    </tr>
+    {% for weeks in content %}
+    <tr>
+        {% for i in weeks %}
+            {% if i == 0 %}
+                <td>&nbsp</td>
+            {% elif i == cur_day and screen_month == cur_month and screen_year == cur_year %}
+                <td style="background-color: #89d98b; text-align: center;"><a href="/main_page/{{screen_year}}-{{screen_month}}-{{i}}/">{{i}}</a></td>
+            {% elif i == screen_day %}
+                <td style="background-color: #ebd294; text-align: center;"><a href="/main_page/{{screen_year}}-{{screen_month}}-{{i}}/">{{i}}</a></td>
+            {% else %}
+                <td style="text-align: center;"><a href="/main_page/{{screen_year}}-{{screen_month}}-{{i}}/">{{i}}</a></td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+{% if screen_month != 8  and screen_month != 3 %}
+    <h1>Мои заметки на {{screen_day}} {{NAME_OF_MONTH[screen_month - 1][:-1] + 'я'}}, {{screen_year}} года</h1>
+{% else %}
+    <h1>Мои заметки на {{screen_day}} {{NAME_OF_MONTH[screen_month - 1] + 'а'}}, {{screen_year}} года</h1>
+{% endif %}
+
+{% for i in notes%}
+<div class="border border rounded" style="background-color: #c3b9ed">
+    <div>
+        {{i.date_of_event}}
+        {{i.time_of_event}}
+        <h2>{{i.title}}</h2>
+    </div>
+    <div>
+        <p>{{i.text}}</p>
+    </div>
+    <div>
+        <a href="/edit_notes/{{ i.id }}" class="btn btn-success" style="background-color: #b9edd4; color: #000">
+            Изменить
+        </a>
+        <a href="/delete_notes/{{ i.id }}" class="btn btn-danger" style="background-color: #f283a4; color: #000">
+            Удалить
+        </a>
+    </div>
+    <br>
+</div>
+{% endfor %}
+<br>
+<div>
+    <a class="btn btn-primary" href="/add_notes/" style="background-color: #711fa3;">Добавить заметку</a>
+</div>
+<br>
+
+
+{% endblock %}
